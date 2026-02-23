@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tororo FC</title>
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1e3a8a">
+</head>
+<body>
+
+<header>
+  <h1>Tororo FC</h1>
+  <img src="logo.png" alt="Team Logo" style="width:120px; border-radius:50%;">
+</header>
+
+<section id="announcements">
+  <h2>Announcements</h2>
+  <ul id="announcementsContainer"></ul>
+</section>
+
+<section id="matches">
+  <h2>Match Updates</h2>
+  <ul id="matchesContainer"></ul>
+</section>
+
+<section id="players">
+  <h2>Meet the Team</h2>
+  <div class="players" id="playersContainer"></div>
+</section>
+
+<script>
+  // Players
+  const playersContainer = document.getElementById('playersContainer');
+  const players = JSON.parse(localStorage.getItem('players')) || [];
+  players.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'player-card';
+    card.innerHTML = `
+      ${p.image ? `<img src="${p.image}" alt="${p.name}">` : ''}
+      <p>${p.name}</p>
+      <p>${p.position}</p>
+    `;
+    playersContainer.appendChild(card);
+  });
+
+  // Announcements
+  const announcementsContainer = document.getElementById('announcementsContainer');
+  const announcements = JSON.parse(localStorage.getItem('announcements')) || [];
+  announcements.forEach(a => {
+    const li = document.createElement('li');
+    li.textContent = a;
+    announcementsContainer.appendChild(li);
+  });
+
+  // Match updates
+  const matchesContainer = document.getElementById('matchesContainer');
+  const matches = JSON.parse(localStorage.getItem('matches')) || [];
+  matches.forEach(m => {
+    const li = document.createElement('li');
+    li.textContent = m;
+    matchesContainer.appendChild(li);
+  });
+
+  // Service Worker for PWA
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tororo FC Admin Login</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div style="text-align:center; margin-top:10%;">
+  <h2>Admin Login</h2>
+  <input type="text" id="username" placeholder="Username"><br>
+  <input type="password" id="password" placeholder="Password"><br>
+  <button onclick="login()">Login</button>
+  <div id="error" style="color:red; margin-top:0.5rem;"></div>
+</div>
+
+<script>
+  const adminUser = 'admin';
+  const adminPass = 'tororo123';
+
+  function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const error = document.getElementById('error');
+    if(username === adminUser && password === adminPass) {
+      window.location.href = 'dashboard.html';
+    } else error.textContent = 'Invalid username or password';
+  }
+</script>
+</body>
+</html>
